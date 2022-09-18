@@ -1,38 +1,47 @@
-#include <stdint.h>
 #include "./serial.hpp"
+#include "./ioports.hpp"
 
-void Chlorine::Serial::WriteByte(unsigned int port, uint8_t data)
+#define PORT 0x3f8
+
+int Chlorine::Serial::InitializeSerial()
 {
-    asm volatile("outb %b0, %w1" : : "a" (data), "Nd" (port));
+    Chlorine::IOPorts::WriteByte(PORT + 1, 0x00);
+    Chlorine::IOPorts::WriteByte(PORT + 3, 0x80);
+    Chlorine::IOPorts::WriteByte(PORT + 0, 0x03);
+    Chlorine::IOPorts::WriteByte(PORT + 1, 0x00);
+    Chlorine::IOPorts::WriteByte(PORT + 3, 0x03);
+    Chlorine::IOPorts::WriteByte(PORT + 2, 0xC7);
+    Chlorine::IOPorts::WriteByte(PORT + 4, 0x0B);
+    Chlorine::IOPorts::WriteByte(PORT + 4, 0x1E);
+    Chlorine::IOPorts::WriteByte(PORT + 0, 0xAE);
+
+    if(Chlorine::IOPorts::ReadByte(PORT + 0) != 0xAE)
+    {
+        return 1;
+    }
+
+    Chlorine::IOPorts::WriteByte(PORT + 4, 0x0F);
+    return 0;
 }
 
-uint8_t Chlorine::Serial::ReadByte(unsigned int port)
+int Chlorine::Serial::SerialRecieved()
 {
-    uint8_t data;
-    asm volatile("inb %w1, %b0" : "=a" (data) : "Nd" (port));
-    return data;
+    return Chlorine::IOPorts::ReadByte(PORT + 5) & 1;
+}
+ 
+char Chlorine::Serial::ReadSerial()
+{
+    while (Chlorine::Serial::SerialRecieved() == 0);
+    return Chlorine::IOPorts::ReadByte(PORT);
 }
 
-void Chlorine::Serial::WriteWord(unsigned int port, uint16_t data)
+int Chlorine::Serial::IsTransmitEmpty()
 {
-    asm volatile("outw %w0, %w1" : : "a" (data), "Nd" (port));
+    return Chlorine::IOPorts::ReadByte(PORT + 5) & 0x20;
 }
-
-uint16_t Chlorine::Serial::ReadWord(unsigned int port)
+ 
+void Chlorine::Serial::WriteSerial(char b185464587a40809a3d4f823f93a5ae9)
 {
-    uint16_t data;
-    asm volatile("inw %w1, %w0" : "=a" (data) : "Nd" (port));
-    return data;
-}
-
-void Chlorine::Serial::WriteInt(unsigned int port, uint32_t data)
-{
-    asm volatile("outl %0, %w1" : : "a" (data), "Nd" (port));
-}
-
-uint32_t Chlorine::Serial::ReadInt(unsigned int port)
-{
-    uint32_t data;
-    asm volatile("inl %w1, %0" : "=a" (data) : "Nd" (port));
-    return data;
+    while (Chlorine::Serial::IsTransmitEmpty() == 0);
+    Chlorine::IOPorts::WriteByte(PORT, b185464587a40809a3d4f823f93a5ae9);
 }
