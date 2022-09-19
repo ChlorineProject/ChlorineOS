@@ -1,12 +1,5 @@
 #pragma once
+#include <stdint.h>
 
-namespace Chlorine
-{
-    namespace Utilities
-    {
-        namespace Misc
-        { }
-        namespace Core
-        { }
-    }
-}
+void memcpy(void *dest, void *src, size_t n);
+void memmove(void *dest, void *src, size_t n);
