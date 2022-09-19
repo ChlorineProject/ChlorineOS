@@ -10,5 +10,5 @@
 void main()
 {
     Chlorine::Serial::InitializeSerial();
-    Chlorine::Screen::Text::WriteString(15, "Hello, world!");
+    Chlorine::Screen::Text::WriteString(15, "Initialized Serial!");
 }

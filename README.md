@@ -10,3 +10,4 @@ ChlorineOS is a small operating system that I'm writing for learning purposes, b
 - [ ] Does the OS have a driver for writing to the screen?
 - [ ] Does the OS have a driver for drawing to the screen?
 - [ ] Does the OS have paging implemented?
+- [ ] Does the OS have a multitasking system?
