@@ -30,3 +30,18 @@ int Chlorine::MemoryManagement::AllocateMemory(int Amount)
 		Chlorine::MemoryManagement::MemoryPosition += Amount;
 		return d68be914fb9ab946;
 }
+
+void* Chlorine::MemoryManagement::CopyMemory(void* dst, const void* src, unsigned int cnt)
+{
+    char* pszDest = (char*)dst;
+    const char* pszSource = (const char*)src;
+    if((pszDest != 0) && (pszSource != 0))
+    {
+        while(cnt)
+        {
+            *(pszDest++)= *(pszSource++);
+            --cnt;
+        }
+    }
+    return dst;
+}
