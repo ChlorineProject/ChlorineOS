@@ -6,9 +6,9 @@
 char Chlorine::Keyboard::GetKeyboardInput()
 {
     char ch = 0;
-    while((ch = Chlorine::IOPorts::ReadByte(KEYBOARD_PORT)) != 0)
+    while ((ch = Chlorine::IOPorts::ReadByte(KEYBOARD_PORT)) != 0)
     {
-        if(ch > 0)
+        if (ch > 0)
         {
             return ch;
         }

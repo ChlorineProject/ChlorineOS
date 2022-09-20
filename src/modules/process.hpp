@@ -3,5 +3,6 @@
 namespace Chlorine
 {
     namespace Process
-    { }
+    {
+    }
 }

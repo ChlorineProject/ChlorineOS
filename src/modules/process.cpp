@@ -5,4 +5,3 @@
  *  multitasking is a type of multitasking where a thread is ran, and when it stops using the CPU, another process is called. Preemptive multitasking is a little
  *  different however, because the processes are equally shared some CPU-usage time.
  */
-

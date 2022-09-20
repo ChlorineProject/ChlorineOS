@@ -6,7 +6,7 @@ namespace Chlorine
     {
         namespace Text
         {
-            void WriteString(int Color, const char* String);
+            void WriteString(int Color, const char *String);
         }
     }
 }

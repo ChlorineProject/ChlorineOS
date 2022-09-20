@@ -14,6 +14,6 @@ namespace Chlorine
 		int StartOfMemory;
 		int AllocateMemory(int Amount);
 		void Initialize();
-		void* CopyMemory(void* dst, const void* src, unsigned int cnt);
+		void *CopyMemory(void *dst, const void *src, unsigned int cnt);
 	}
 }
