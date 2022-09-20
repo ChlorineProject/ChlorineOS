@@ -6,11 +6,11 @@ namespace Chlorine
 {
     namespace IOPorts
     {
-        void WriteByte(unsigned int port, uint8_t data);
-        uint8_t ReadByte(unsigned int port);
-        void WriteWord(unsigned int port, uint16_t data);
-        uint16_t ReadWord(unsigned int port);
-        void WriteInt(unsigned int port, uint32_t data);
-        uint32_t ReadInt(unsigned int port);
+        void WriteByte(unsigned int port, unsigned char data);
+        unsigned char ReadByte(unsigned int port);
+        void WriteWord(unsigned int port, unsigned short int data);
+        unsigned short int ReadWord(unsigned int port);
+        void WriteInt(unsigned int port, unsigned int data);
+        unsigned int ReadInt(unsigned int port);
     }
 }
