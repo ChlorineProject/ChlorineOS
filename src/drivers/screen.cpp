@@ -2,6 +2,7 @@
 #include "./../utils/utils.hpp"
 #include "./ioports.hpp"
 #include "./../modules/issues.hpp"
+#include "./../main.hpp"
 
 /*
  *  Section for text-mode related stuff
@@ -9,12 +10,22 @@
  *      "For standard VGA video modes the video memory will be at address 0xA0000 for EGA/VGA video modes and 0xB8000 for CGA and text modes. To find out which one look at the following table: "
  */
 
+volatile char *Video = (volatile char *)0xB8000;
+
+void Chlorine::Screen::Text::WriteCharacter(int Color, char Character)
+{
+    /*
+     *  Working on this function ngl idk how to turn WriteString() into WriteCharacter(), so
+     *  I guess we will use serial as a terminal for now...
+     */
+    *Video++ = Chlorine::Utilities::String::ConCat(Color, Character);
+}
+
 void Chlorine::Screen::Text::WriteString(int Color, const char *String)
 {
     /*
      *  For some reason, I can't have `volatile char* Video = (volatile char*)0xB8000;` outside of this function...
      */
-    volatile char *Video = (volatile char *)0xB8000;
     while (*String != 0)
     {
         *Video++ = *String++;
@@ -40,7 +51,7 @@ void Chlorine::Screen::Text::UpdateCursor(int x, int y)
 {
     if(VGA_WIDTH == 0)
     {
-        Chlorine::Issues::Error("There has been an error; the variable VGA_WIDTH cannot be set to 0. Shouldn't it be set to the corresponding width of the VGA text mode screen?");
+        //Chlorine::Issues::Error("There has been an error; the variable VGA_WIDTH cannot be set to 0. Shouldn't it be set to the corresponding width of the VGA text mode screen?", term);
     }
     else
     {
@@ -61,4 +72,10 @@ unsigned short int Chlorine::Screen::Text::GetCursorPosition()
     Chlorine::IOPorts::WriteByte(0x3D4, 0x0E);
     pos |= ((unsigned short int)Chlorine::IOPorts::ReadByte(0x3D5)) << 8;
     return pos;
+}
+
+void Chlorine::Screen::Gui::PutPixel(int x, int y, unsigned char VgaColor)
+{
+    unsigned char* location = (unsigned char*)0xA0000 + 320 * y + x;
+    *location = VgaColor;
 }

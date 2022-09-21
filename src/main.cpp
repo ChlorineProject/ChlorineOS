@@ -2,13 +2,14 @@
  *  First part of the ChlorineOS kernel. Once `boot.s` is ran, it will call the function `main()` which is below.
  */
 
-#include "./drivers/ioports.hpp"
+#include "./main.hpp"
 #include "./drivers/serial.hpp"
-#include "./utils/utils.hpp"
+#include "./modules/terminal.hpp"
 #include "./drivers/screen.hpp"
 
 void main()
 {
     Chlorine::Serial::InitializeSerial();
-    Chlorine::Screen::Text::WriteString(15, "Initialized Serial!");
+    Chlorine::Terminal term = Chlorine::Terminal(SERIAL_MODE);
+    term.OutputToTerminal(5, "When you're sitting on the toilet and the credit card declines... sdfsadfafgasdkjhgfsakjhdfadshgfkfdsagkjhfdsakgjfdsagjhfdsakjhgfdsahgjkdsf");
 }
