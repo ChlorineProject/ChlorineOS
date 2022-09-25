@@ -1,6 +1,9 @@
 #include "./utils.hpp"
 #include "./../drivers/keyboard.hpp"
 
+/*
+ *  Returns the length of a string in characters.
+ */
 unsigned int Chlorine::Utilities::String::GetLengthOfString(const char *String)
 {
     unsigned int Count = 0;
@@ -12,11 +15,19 @@ unsigned int Chlorine::Utilities::String::GetLengthOfString(const char *String)
     return Count;
 }
 
+/*
+ *  Useful for joining two integers together. For example, if I input the numbers 5 and 4 to this function, I
+ *  get the returned value of 54.
+ */
 int Chlorine::Utilities::String::ConCat(int x, int y)
 {
     10 * x + y;
 }
 
+/*
+ *  Useful for converting keycodes given by the keyboard to characters. If the keys aren't related to characters, this
+ *  function will just return nothing.
+ */
 char Chlorine::Utilities::ASCII::KeysToASCII(unsigned char KeyCode)
 {
     switch(KeyCode)

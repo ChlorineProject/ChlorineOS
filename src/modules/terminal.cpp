@@ -27,11 +27,18 @@ void Chlorine::Terminal::OutputToTerminal(int Color, const char* Message)
     }
 }
 
+/*
+ *  Returns the keycode of the key that is pressed in the terminal.
+ */
 unsigned char Chlorine::Terminal::InputKeycodeToTerminal()
 {
     return Chlorine::Keyboard::GetKeyboardInput();
 }
 
+/*
+ *  Reads a the key that is pressed on a terminal, then it returns it's character value, if the key
+ *  even represents a character.
+ */
 char Chlorine::Terminal::InputCharacterToTerminal()
 {
     return Chlorine::Utilities::ASCII::KeysToASCII(Chlorine::Keyboard::GetKeyboardInput());

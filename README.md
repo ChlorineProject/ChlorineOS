@@ -33,3 +33,10 @@ qemu
 ```
 
 I believe that these can be installed with debian's/ubuntu's package manager, aswell as Arch linux's package manager. I may soon make a new page exactly describing how to install these packages, but for now I'm busy implementing more functions.
+
+## Troubleshooting
+
+Here you can read how to fix any issues with ChlorineOS.
+
+### Help! I can't see anything when testing ChlorineOS!
+Remember to switch ChlorineOS's display to `serial0`, since VGA text-mode terminals are still a work-in-progress.
