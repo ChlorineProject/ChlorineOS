@@ -9,5 +9,9 @@ namespace Chlorine
             unsigned int GetLengthOfString(const char *String);
             int ConCat(int x, int y);
         }
+        namespace ASCII
+        {
+            char KeysToASCII(unsigned char KeyCode);
+        }
     }
 }

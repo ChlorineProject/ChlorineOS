@@ -4,6 +4,8 @@
 
 ChlorineOS is a small operating system that I'm writing for learning purposes, but I also would like to make this operating system as an alternative to Linux-based operating systems and BSD-based operating systems, while having support for some of their programs.
 
+Currently, I am trying to implement some basic stuff, like some fundamental drivers, modules, and utilities. While I add these, the operating system will just serve as a CLI that allows you to perform calculations, and test different functions.
+
 ## Progress checklist
 
 - [x] Does the OS boot up?

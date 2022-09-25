@@ -22,6 +22,7 @@ namespace Chlorine
         /*
          *  Here, we can recieve from the terminal.
          */
-        char InputToTerminal();
+        unsigned char InputKeycodeToTerminal();
+        char InputCharacterToTerminal();
     };
 }
