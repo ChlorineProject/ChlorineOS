@@ -1,5 +1,8 @@
-build-x86:
+src := $(wildcard *.cpp)
+
+build-x86: ${src}
 	as --32 ./src/boot.s -o ./tmp/f992ec0de305adc5e40d477ce2e6c2a5.o
+
 	g++ -m32 -c ./src/main.cpp -o ./tmp/76bd44161dfc527e683557b9611d9d66.o -ffreestanding -O2 -Wall -Wextra
 	g++ -m32 -c ./src/drivers/ioports.cpp -o ./tmp/70c90fcd5712e5e32be5a993916994c5.o -ffreestanding -O2 -Wall -Wextra
 	g++ -m32 -c ./src/drivers/serial.cpp -o ./tmp/7d5fc34168bb269a88ba84255f8352d0.o -ffreestanding -O2 -Wall -Wextra

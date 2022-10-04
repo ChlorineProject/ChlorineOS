@@ -11,5 +11,6 @@ namespace Chlorine
 	namespace MemoryManagement
 	{
 		void *CopyMemory(void *dst, const void *src, unsigned int cnt);
+		void *AllocateMemory(unsigned int Amount);
 	}
 }

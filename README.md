@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./.assets/logo.png" />
+</p>
+
 # ChlorineOS
 
 ## What is ChlorineOS?
@@ -12,12 +16,12 @@ Currently, I am trying to implement some basic stuff, like some fundamental driv
 - [x] Does the OS have the kernel atleast working?
 - [x] Does the OS have an I/O port driver?
 - [x] Does the OS have serial driver?
-- [ ] Does the OS have a terminal module?
-- [ ] Does the OS have a driver for writing to the screen?
+- [X] Does the OS have a terminal module?
+- [X] Does the OS have a driver for writing to the screen?
 - [ ] Does the OS have a driver for drawing to the screen?
 - [ ] Does the OS have paging implemented?
 - [ ] Does the OS have a multitasking system?
-- [x] does the OS have a screen drawing class?
+- [ ] Does the OS have a good & efficient memory allocator?
 
 ## Any dependencies?
 

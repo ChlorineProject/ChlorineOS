@@ -20,17 +20,4 @@ void main()
      *  a temporary CLI since its not shell-executable based).
      */
     term.OutputToTerminal(5, "ChlorineOS Copyright (C) 2022 ChlorineProject This program comes with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to redistribute it under certain conditions.\n\r");
-    while(1)
-    {
-        term.OutputToTerminal(5, "\n\r\n\rCHOOSE AN OPTION:\n\rX\tHALT SYSTEM\n\rY\tLICENSE NOTICE");
-        char x = term.InputCharacterToTerminal();
-        if(x == 'X')
-        {
-            asm volatile("hlt");
-        }
-        else if(x == 'Y')
-        {
-            term.OutputToTerminal(5, "ChlorineOS Copyright (C) 2022 ChlorineProject This program comes with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to redistribute it under certain conditions.\n\r");
-        }
-    }
 }
