@@ -18,5 +18,9 @@ namespace Chlorine
         {
             char KeysToASCII(unsigned char KeyCode);
         }
+        namespace Types
+        {
+            
+        }
     }
 }

@@ -15,17 +15,12 @@ volatile char *Video = (volatile char *)0xB8000;
 void Chlorine::Screen::Text::WriteCharacter(int Color, char Character)
 {
     /*
-     *  Working on this function ngl idk how to turn WriteString() into WriteCharacter(), so
-     *  I guess we will use serial as a terminal for now...
-     */
-    *Video++ = Chlorine::Utilities::String::ConCat(Color, Character);
+	 *	Development on VGA text-mode terminals is halted.
+	 */
 }
 
 void Chlorine::Screen::Text::WriteString(int Color, const char *String)
 {
-    /*
-     *  For some reason, I can't have `volatile char* Video = (volatile char*)0xB8000;` outside of this function...
-     */
     while (*String != 0)
     {
         *Video++ = *String++;
