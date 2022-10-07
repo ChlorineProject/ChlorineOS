@@ -73,9 +73,3 @@ unsigned short int Chlorine::Screen::Text::GetCursorPosition()
     pos |= ((unsigned short int)Chlorine::IOPorts::ReadByte(0x3D5)) << 8;
     return pos;
 }
-
-void Chlorine::Screen::Gui::PutPixel(int x, int y, unsigned char VgaColor)
-{
-    unsigned char* location = (unsigned char*)0xA0000 + 320 * y + x;
-    *location = VgaColor;
-}

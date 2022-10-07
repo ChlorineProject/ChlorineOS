@@ -1,5 +1,8 @@
 #include "./memory.hpp"
 
+const auto& kmalloc = Chlorine::MemoryManagement::AllocateMemory;
+const auto& memcpy = Chlorine::MemoryManagement::CopyMemory;
+
 void *Chlorine::MemoryManagement::CopyMemory(void *dst, const void *src, unsigned int cnt)
 {
 	char *pszDest = (char *)dst;
@@ -17,8 +20,9 @@ void *Chlorine::MemoryManagement::CopyMemory(void *dst, const void *src, unsigne
 
 void *Chlorine::MemoryManagement::AllocateMemory(unsigned int Amount)
 {
-	/*
-	 *	Development on the memory allocation has been halted; I will implement some other things first, like
-	 *	implementing descriptor tables.
-	 */
+	Chlorine::MemoryManagement::MemoryFlag MemoryFlagInstance;
+	MemoryFlagInstance.StartPosition = UsedMemoryAddress;
+	UsedMemoryAddress += Amount;
+	MemoryFlagInstance.EndPosition = UsedMemoryAddress;
+	return (void*)MemoryFlagInstance.StartPosition;
 }

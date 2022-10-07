@@ -13,12 +13,13 @@ namespace Chlorine
          *  desktop?
          */
         unsigned char TerminalType = 0;
-        public:
+
+    public:
         Terminal(unsigned char TermType);
         /*
          *  Here, we can send a message to the terminal. Basically, this means sending input to a terminal.
          */
-        void OutputToTerminal(int Color, const char* Message);
+        void OutputToTerminal(int Color, const char *Message);
         /*
          *  Here, we can recieve from the terminal.
          */

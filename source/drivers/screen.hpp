@@ -18,7 +18,6 @@ namespace Chlorine
         }
         namespace Gui
         {
-            void PutPixel(int x, int y, unsigned char VgaColor);
         }
     }
 }

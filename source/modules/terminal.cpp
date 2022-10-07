@@ -13,14 +13,14 @@ void Chlorine::Terminal::OutputToTerminal(int Color, const char* Message)
 {
     if(Chlorine::Terminal::TerminalType == TEXT_MODE)
     {
-        for(int i = 0; i<= Chlorine::Utilities::String::GetLengthOfString(Message); i++)
+        for(int i = 0; i<= (int)Chlorine::Utilities::String::GetLengthOfString(Message); i++)
         {
             Chlorine::Screen::Text::WriteCharacter(Color, Message[i]);
         }
     }
     else if(Chlorine::Terminal::TerminalType == SERIAL_MODE)
     {
-        for(int i = 0; i <= Chlorine::Utilities::String::GetLengthOfString(Message); i++)
+        for(int i = 0; i <= (int)Chlorine::Utilities::String::GetLengthOfString(Message); i++)
         {
             Chlorine::Serial::WriteSerial(Message[i]);
         }

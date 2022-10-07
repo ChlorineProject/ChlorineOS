@@ -21,7 +21,7 @@ unsigned int Chlorine::Utilities::String::GetLengthOfString(const char *String)
  */
 int Chlorine::Utilities::String::ConCat(int x, int y)
 {
-    10 * x + y;
+    return 10 * x + y;
 }
 
 /*
