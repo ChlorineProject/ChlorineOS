@@ -62,7 +62,7 @@ ARCHITECTURE=i386
 ```
 Please note that you can compile for the target architecture if your current architecture is the same, although if you want to compile for x86 on a different architecture, you will need a cross compiler that compiles for x86.
 
-~~### Help! I can't see anything when testing ChlorineOS!~~
+### ~~Help! I can't see anything when testing ChlorineOS!~~
 ~~Remember to switch ChlorineOS's display to `serial0`, since VGA text-mode terminals are still a work-in-progress (on QEMU).~~
 
 ### Help! I get the error Fatal error: can't create ./object/*.o: No such file or directory
