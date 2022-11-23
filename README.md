@@ -17,10 +17,10 @@ ChlorineOS is no longer written in C++, as C++ has given me alot of problems whe
 - [x] Does the OS have an I/O port driver?
 - [x] Does the OS have serial driver?
 - [X] Does the OS have a driver for writing to the screen?
-- [ ] Does the OS have a driver for drawing to the screen?
+- [X] Does the OS have a driver for drawing to the screen?
 - [ ] Does the OS have paging implemented?
 - [ ] Does the OS have a multitasking system?
-- [ ] Does the OS have a good & efficient memory allocator?
+- [X] Does the OS have a good & efficient memory allocator?
 - [X] Does the OS have GDT?
 - [X] Does the OS have IDT?
 
