@@ -27,6 +27,7 @@ void main()
     /*
      *  Let's initialize the serial driver (`drivers/serial.c` & `drivers/serial.h`)
      */
+    printf("[CHL]: Initializing the serial module...\n");
     init_serial();
     /*
      *  If we're using a i386-compatible operating system, then we shall initialize descriptor tables...
@@ -36,6 +37,9 @@ void main()
     init_descriptor_tables();
     #endif
     printf("[CHL]: Initializing the heap...\n");
+    /*
+     *  Let's initialize the heap!
+     */
     init_heap(heap_start, heap_end);
     /*
      *  Now that the heap is initialized, we can allocate memory, free it, etc. This allows us to create a memory-efficient
@@ -45,4 +49,11 @@ void main()
      *      | void *ptr2 = kmalloc(1024);
      *      | printf("Let's allocate 1024 more bytes...\nThis is the pointer to the allocated memory: %d\n", ptr2);
      */
+    /*
+     *  Let's setup the 8259 PIC (Programmable Interrupt Controller)
+     */
+    #if ARCHITECTURE == 1
+    printf("[CHL]: Initializing 8259 PIC...\n");
+    init_8259pic();
+    #endif
 }

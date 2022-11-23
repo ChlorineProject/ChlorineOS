@@ -8,7 +8,7 @@ void *g_kheap_start_addr = NULL, *g_kheap_end_addr = NULL;
 unsigned long g_total_size = 0;
 unsigned long g_total_used_size = 0;
 
-KHEAP_BLOCK *g_head = NULL;
+kheap_block_t *g_head = NULL;
 
 int init_heap(void *start_addr, void *end_addr)
 {
@@ -42,15 +42,15 @@ void *kbrk(int size)
 
 void kheap_print_blocks()
 {
-    KHEAP_BLOCK *temp = g_head;
-    printf("Block Size: %d\n", sizeof(KHEAP_BLOCK));
+    kheap_block_t *temp = g_head;
+    printf("Block Size: %d\n", sizeof(kheap_block_t));
     while (temp != NULL)
     {
         printf("size:%d, free:%d, data: 0x%x, curr: 0x%x, next: 0x%x\n", temp->metadata.size, temp->metadata.is_free, temp->data, temp, temp->next); temp = temp->next;
     }
 }
 
-bool is_block_free(KHEAP_BLOCK *block)
+bool is_block_free(kheap_block_t *block)
 {
     if (!block)
     {
@@ -59,9 +59,9 @@ bool is_block_free(KHEAP_BLOCK *block)
     return (block->metadata.is_free == true);
 }
 
-KHEAP_BLOCK *worst_fit(int size)
+kheap_block_t *worst_fit(int size)
 {
-    KHEAP_BLOCK *temp = g_head;
+    kheap_block_t *temp = g_head;
     while (temp != NULL)
     {
         if (is_block_free(temp))
@@ -76,14 +76,14 @@ KHEAP_BLOCK *worst_fit(int size)
     return NULL;
 }
 
-KHEAP_BLOCK *allocate_new_block(int size)
+kheap_block_t *allocate_new_block(int size)
 {
-    KHEAP_BLOCK *temp = g_head;
+    kheap_block_t *temp = g_head;
     while (temp->next != NULL)
     {
         temp = temp->next;
     }
-    KHEAP_BLOCK *new_block = (KHEAP_BLOCK *)kbrk(sizeof(KHEAP_BLOCK));
+    kheap_block_t *new_block = (kheap_block_t *)kbrk(sizeof(kheap_block_t));
     new_block->metadata.is_free = false;
     new_block->metadata.size = size;
     new_block->data = kbrk(size);
@@ -100,7 +100,7 @@ void *kmalloc(int size)
     }
     if (g_head == NULL)
     {
-        g_head = (KHEAP_BLOCK *)kbrk(sizeof(KHEAP_BLOCK));
+        g_head = (kheap_block_t *)kbrk(sizeof(kheap_block_t));
         g_head->metadata.is_free = false;
         g_head->metadata.size = size;
         g_head->next = NULL;
@@ -109,10 +109,10 @@ void *kmalloc(int size)
     }
     else
     {
-        KHEAP_BLOCK *worst = worst_fit(size);
+        kheap_block_t *worst = worst_fit(size);
         if (worst == NULL)
         {
-            KHEAP_BLOCK *new_block = allocate_new_block(size);
+            kheap_block_t *new_block = allocate_new_block(size);
             new_block->metadata.is_free = false;
             new_block->metadata.size = size;
             new_block->data = kbrk(size);
@@ -140,12 +140,12 @@ void *kcalloc(int n, int size)
 
 void *krealloc(void *ptr, int size)
 {
-    KHEAP_BLOCK *temp = g_head;
+    kheap_block_t *temp = g_head;
     while (temp != NULL) 
     {
         if (temp->data == ptr)
         {
-            KHEAP_BLOCK *new_block = allocate_new_block(size);
+            kheap_block_t *new_block = allocate_new_block(size);
             if ((int)temp->metadata.size > size)
             {
                 memcpy(new_block->data, ptr, size);
@@ -164,7 +164,7 @@ void *krealloc(void *ptr, int size)
 
 void kfree(void *addr)
 {
-    KHEAP_BLOCK *temp = g_head;
+    kheap_block_t *temp = g_head;
     while (temp != NULL)
     {
         if (temp->data == addr)

@@ -11,7 +11,7 @@ typedef struct _kheap_block {
     } metadata;
     struct _kheap_block *next; 
     void *data;
-} __attribute__((packed)) KHEAP_BLOCK;
+} __attribute__((packed)) kheap_block_t;
 
 int init_heap(void *start_addr, void *end_addr);
 
