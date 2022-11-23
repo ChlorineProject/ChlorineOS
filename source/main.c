@@ -3,10 +3,13 @@
  */
 #include "./drivers/serial.h"
 /*
+ *  Let's include `common.h` for the `printf` function!
+ */
+#include "./modules/common.h"
+/*
  *  Let's now include all of the i386-compatible code, if we will even compile for i386 or i386-related architectures.
  */
 #if ARCHITECTURE == 1
-#include "./arch/i386/monitor.h"
 #include "./arch/i386/dt.h"
 #endif
 
@@ -24,8 +27,8 @@ void main()
      *  If we're using a i386-compatible operating system, then we shall initialize descriptor tables...
      */
     #if ARCHITECTURE == 1
-    monitor_write("Hello, world!\nLet's enable descriptor tables now...\n");
+    printf("Hello, world!\nLet's enable descriptor tables now...\n");
     init_descriptor_tables();
-    monitor_write("Alright, we called `init_descriptor_tables`!\n");
+    printf("Alright, we called `init_descriptor_tables`!\n");
     #endif
 }
