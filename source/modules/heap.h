@@ -13,7 +13,7 @@ typedef struct _kheap_block {
     void *data;
 } __attribute__((packed)) KHEAP_BLOCK;
 
-int kheap_init(void *start_addr, void *end_addr);
+int init_heap(void *start_addr, void *end_addr);
 
 void *kbrk(int size);
 

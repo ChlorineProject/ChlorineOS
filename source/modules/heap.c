@@ -10,11 +10,11 @@ unsigned long g_total_used_size = 0;
 
 KHEAP_BLOCK *g_head = NULL;
 
-int kheap_init(void *start_addr, void *end_addr)
+int init_heap(void *start_addr, void *end_addr)
 {
     if (start_addr > end_addr)
     {
-        printf("failed to init kheap\n");
+        printf("[CHL]: Failed to initialize heap...\n");
         return -1;
     }
     g_kheap_start_addr = start_addr;

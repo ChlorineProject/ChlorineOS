@@ -20,6 +20,11 @@
 void main()
 {
     /*
+     *  Let's define some pointers that will map out the heap for ChlorineOS's kernel...
+     */
+    void *heap_start = 0x00E00000;
+    void *heap_end = heap_start + 0x00100000;
+    /*
      *  Let's initialize the serial driver (`drivers/serial.c` & `drivers/serial.h`)
      */
     init_serial();
@@ -27,8 +32,17 @@ void main()
      *  If we're using a i386-compatible operating system, then we shall initialize descriptor tables...
      */
     #if ARCHITECTURE == 1
-    printf("Hello, world!\nLet's enable descriptor tables now...\n");
+    printf("[CHL]: Initializing descriptor tables...\n");
     init_descriptor_tables();
-    printf("Alright, we called `init_descriptor_tables`!\n");
     #endif
+    printf("[CHL]: Initializing the heap...\n");
+    init_heap(heap_start, heap_end);
+    /*
+     *  Now that the heap is initialized, we can allocate memory, free it, etc. This allows us to create a memory-efficient
+     *  kernel:
+     *      | void *ptr = kmalloc(1024);
+     *      | printf("Let's allocate 1024 bytes...\nThis is the pointer to the allocated memory: %d\n", ptr);
+     *      | void *ptr2 = kmalloc(1024);
+     *      | printf("Let's allocate 1024 more bytes...\nThis is the pointer to the allocated memory: %d\n", ptr2);
+     */
 }
