@@ -1,8 +1,8 @@
 #include <stdint.h>
 #include <stddef.h>
-#include <string.h>
 
 #include "./physmm.h"
+#include "./common.h"
 
 static PMM_INFO g_pmm_info;
 

@@ -58,7 +58,7 @@ gcc-multilib g++-multilib
 ### Help! Make says `Nothing to be done for 'kernel'/'image'`!
 This probably shows up because you haven't set what architecture the operating system will compile for. Currently, the only architecture supported is x86, so you'll have to send the following command:
 ```bash
-ARCHITECTURE=i386
+export ARCHITECTURE=i386
 ```
 Please note that you can compile for the target architecture if your current architecture is the same, although if you want to compile for x86 on a different architecture, you will need a cross compiler that compiles for x86.
 
