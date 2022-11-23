@@ -100,7 +100,7 @@ isr_common_stub:
     sti
     iret
 
-extern irq_handler
+extern irq_handler ; let's get the `irq_handler` function from our C code...
 
 irq_common_stub:
     pusha

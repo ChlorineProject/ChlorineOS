@@ -1,3 +1,8 @@
+/*
+ *  The files `dt.c` & `dt.h` are important if we're going to be using ChlorineOS with the x86 (i386 and up) architecture, because
+ *  they allow us to create tables which we can forward to the CPU, allowing us to tell the CPU what properties certain memory has.
+ */
+
 #include <stdint.h>
 #include <string.h>
 
@@ -70,16 +75,16 @@ static void init_idt()
     outb(0x21, 0x0);
     outb(0xA1, 0x0);
 
-    idt_set_gate( 0, (uint32_t)isr0 , 0x08, 0x8E);
-    idt_set_gate( 1, (uint32_t)isr1 , 0x08, 0x8E);
-    idt_set_gate( 2, (uint32_t)isr2 , 0x08, 0x8E);
-    idt_set_gate( 3, (uint32_t)isr3 , 0x08, 0x8E);
-    idt_set_gate( 4, (uint32_t)isr4 , 0x08, 0x8E);
-    idt_set_gate( 5, (uint32_t)isr5 , 0x08, 0x8E);
-    idt_set_gate( 6, (uint32_t)isr6 , 0x08, 0x8E);
-    idt_set_gate( 7, (uint32_t)isr7 , 0x08, 0x8E);
-    idt_set_gate( 8, (uint32_t)isr8 , 0x08, 0x8E);
-    idt_set_gate( 9, (uint32_t)isr9 , 0x08, 0x8E);
+    idt_set_gate(0, (uint32_t)isr0 , 0x08, 0x8E);
+    idt_set_gate(1, (uint32_t)isr1 , 0x08, 0x8E);
+    idt_set_gate(2, (uint32_t)isr2 , 0x08, 0x8E);
+    idt_set_gate(3, (uint32_t)isr3 , 0x08, 0x8E);
+    idt_set_gate(4, (uint32_t)isr4 , 0x08, 0x8E);
+    idt_set_gate(5, (uint32_t)isr5 , 0x08, 0x8E);
+    idt_set_gate(6, (uint32_t)isr6 , 0x08, 0x8E);
+    idt_set_gate(7, (uint32_t)isr7 , 0x08, 0x8E);
+    idt_set_gate(8, (uint32_t)isr8 , 0x08, 0x8E);
+    idt_set_gate(9, (uint32_t)isr9 , 0x08, 0x8E);
     idt_set_gate(10, (uint32_t)isr10, 0x08, 0x8E);
     idt_set_gate(11, (uint32_t)isr11, 0x08, 0x8E);
     idt_set_gate(12, (uint32_t)isr12, 0x08, 0x8E);
@@ -125,7 +130,7 @@ static void idt_set_gate(uint8_t num, uint32_t base, uint16_t sel, uint8_t flags
 {
     idt_entries[num].base_lo = base & 0xFFFF;
     idt_entries[num].base_hi = (base >> 16) & 0xFFFF;
-    idt_entries[num].sel     = sel;
+    idt_entries[num].sel = sel;
     idt_entries[num].always0 = 0;
     idt_entries[num].flags = flags;
 }

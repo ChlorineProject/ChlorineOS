@@ -1,4 +1,4 @@
-[GLOBAL gdt_flush]
+[GLOBAL gdt_flush] ; let's make the `gdt_flush` function accessible by our C code...
 
 gdt_flush:
     mov eax, [esp+4]
@@ -14,9 +14,9 @@ gdt_flush:
 .flush:
     ret
 
-[GLOBAL idt_flush]
+[GLOBAL idt_flush] ; let's make the `idt_flush` function accessible by our C code...
 
 idt_flush:
     mov eax, [esp+4]
-    lidt [eax]
+    lidt [eax] ; let's pass the IDT table to the CPU!
     ret

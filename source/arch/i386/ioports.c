@@ -1,3 +1,7 @@
+/*
+ *  The files `ioports.c` & `ioports.h` are used to interact with hardware using the CPU...
+ */
+
 #include <stdint.h>
 
 #include "./ioports.h"
