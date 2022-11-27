@@ -7,6 +7,10 @@
  */
 #include "./modules/common.h"
 /*
+ *  Let's include `fs.h` to create the root of our filesystem...
+ */
+#include "./modules/fs.h"
+/*
  *  Let's now include all of the i386-compatible code, if we will even compile for i386 or i386-related architectures.
  */
 #if ARCHITECTURE == 1
@@ -27,16 +31,16 @@ void main()
     /*
      *  Let's initialize the serial driver (`drivers/serial.c` & `drivers/serial.h`)
      */
-    printf("[CHL]: Initializing the serial module...\n");
+    printf("Initializing the serial module...\n");
     init_serial();
     /*
      *  If we're using a i386-compatible operating system, then we shall initialize descriptor tables...
      */
     #if ARCHITECTURE == 1
-    printf("[CHL]: Initializing descriptor tables...\n");
+    printf("Initializing descriptor tables...\n");
     init_descriptor_tables();
     #endif
-    printf("[CHL]: Initializing the heap...\n");
+    printf("Initializing the heap...\n");
     /*
      *  Let's initialize the heap!
      */
@@ -53,7 +57,24 @@ void main()
      *  Let's setup the 8259 PIC (Programmable Interrupt Controller)
      */
     #if ARCHITECTURE == 1
-    printf("[CHL]: Initializing 8259 PIC...\n");
+    printf("Initializing 8259 PIC...\n");
     init_8259pic();
+    /*
+     *  Let's create our filesystem, by initializing the root directory...
+     */
+    fs_node_t root;
+    root->file_content_ptr = 0;
+    root->file_size = 0;
+    root->device = -1;
+    root->path = "/";
+    /*
+     *  Let's now create a file that is just an executable which sets up the rest of the operating system, i.e it creates
+     *  the bin/, etc/, home/, sys/, etc.
+     */
+    fs_node_t init;
+    root->file_content_ptr = 0;
+    root->file_size = 0;
+    root->device = -1;
+    root->path = "/";
     #endif
 }
