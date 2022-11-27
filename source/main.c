@@ -18,6 +18,12 @@
 #endif
 
 /*
+ *  Let's define the basic values so that we can later run the init.sys file!
+ */
+#define INITEXE_START 0x00000000
+#define INITEXE_SIZE 0x00000000
+
+/*
  *  This is the function that is called by `entry.asm`. The file `entry.asm` gets loaded by the GRUB bootloader, and
  *  that's how ChlorineOS gets loaded...
  */
@@ -59,6 +65,7 @@ void main()
     #if ARCHITECTURE == 1
     printf("Initializing 8259 PIC...\n");
     init_8259pic();
+    #endif
     /*
      *  Let's create our filesystem, by initializing the root directory...
      */
@@ -72,9 +79,8 @@ void main()
      *  the bin/, etc/, home/, sys/, etc.
      */
     fs_node_t init;
-    root->file_content_ptr = 0;
-    root->file_size = 0;
+    root->file_content_ptr = INITEXE_START;
+    root->file_size = INITEXE_SIZE;
     root->device = -1;
-    root->path = "/";
-    #endif
+    root->path = "/init.sys";
 }
