@@ -16,12 +16,12 @@
 #if ARCHITECTURE == 1
 #include "./arch/i386/dt.h"
 #endif
-
 /*
- *  Let's define the basic values so that we can later run the init.sys file!
+ *  Let's include the machine code of the init program!
  */
-#define INITEXE_START 0x00000000
-#define INITEXE_SIZE 0x00000000
+#if ARCHITECTURE == 1
+#include "./userspace/init.h"
+#endif
 
 /*
  *  This is the function that is called by `entry.asm`. The file `entry.asm` gets loaded by the GRUB bootloader, and
@@ -70,17 +70,18 @@ void main()
      *  Let's create our filesystem, by initializing the root directory...
      */
     fs_node_t root;
-    root->file_content_ptr = 0;
-    root->file_size = 0;
-    root->device = -1;
-    root->path = "/";
+    root.file_content_ptr = 0;
+    root.file_size = 0;
+    root.device = -1;
+    strcpy(root.path, "/");
     /*
      *  Let's now create a file that is just an executable which sets up the rest of the operating system, i.e it creates
-     *  the bin/, etc/, home/, sys/, etc.
+     *  the bin/, etc/, home/, sys/, etc. For now, the file will be created by the kernel itself, although it could be
+     *  loaded manually, and called by the kernel.
      */
     fs_node_t init;
-    root->file_content_ptr = INITEXE_START;
-    root->file_size = INITEXE_SIZE;
-    root->device = -1;
-    root->path = "/init.sys";
+    init.file_content_ptr = (uintptr_t)&init_code;
+    init.file_size = sizeof(init_code);
+    init.device = -1;
+    strcpy(init.path, "/init.sys");
 }

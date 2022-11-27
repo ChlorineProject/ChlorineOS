@@ -1,6 +1,9 @@
 #ifndef HEADER_dbbeeaa6
 #define HEADER_dbbeeaa6
 
+#include <stdint.h>
+#include <stddef.h>
+
 #include "./../main.h"
 
 /*
