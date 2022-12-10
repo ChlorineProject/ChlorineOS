@@ -35,6 +35,7 @@
  */
 #if ARCHITECTURE == 1
 #include "./arch/i386/dt.h"
+#include "./arch/i386/paging.h"
 #endif
 
 /*
@@ -57,6 +58,8 @@ void main()
      *  If we're using a i386-compatible operating system, then we shall initialize descriptor tables...
      */
     #if ARCHITECTURE == 1
+    printf("Initializing paging...\n");
+    init_paging();
     printf("Initializing descriptor tables...\n");
     init_descriptor_tables();
     #endif

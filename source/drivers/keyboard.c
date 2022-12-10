@@ -1,7 +1,7 @@
 #include "./keyboard.h"
 
 #if ARCHITECTURE == 1
-#include "./../ioports.h"
+#include "./../arch/i386/ioports.h"
 #endif
 
 
