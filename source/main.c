@@ -1,4 +1,24 @@
 /*
+ *  ChlorineOS - A work-in-progress operating system working to be
+ *               UNIX-like...
+ *
+ *  Copyright (C) 2022 Nexuss (https://github.com/Dashbloxx)
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+/*
  *  We'll need the serial driver here, because we will initialize the serial module.
  */
 #include "./drivers/serial.h"
@@ -16,12 +36,6 @@
 #if ARCHITECTURE == 1
 #include "./arch/i386/dt.h"
 #endif
-/*
- *  Let's include the machine code of the init program!
- */
-#if ARCHITECTURE == 1
-#include "./userspace/init.h"
-#endif
 
 /*
  *  This is the function that is called by `entry.asm`. The file `entry.asm` gets loaded by the GRUB bootloader, and
@@ -32,7 +46,7 @@ void main()
     /*
      *  Let's define some pointers that will map out the heap for ChlorineOS's kernel...
      */
-    void *heap_start = 0x00E00000;
+    void *heap_start = (uint32_t)0x00E00000;
     void *heap_end = heap_start + 0x00100000;
     /*
      *  Let's initialize the serial driver (`drivers/serial.c` & `drivers/serial.h`)
@@ -66,22 +80,4 @@ void main()
     printf("Initializing 8259 PIC...\n");
     init_8259pic();
     #endif
-    /*
-     *  Let's create our filesystem, by initializing the root directory...
-     */
-    fs_node_t root;
-    root.file_content_ptr = 0;
-    root.file_size = 0;
-    root.device = -1;
-    strcpy(root.path, "/");
-    /*
-     *  Let's now create a file that is just an executable which sets up the rest of the operating system, i.e it creates
-     *  the bin/, etc/, home/, sys/, etc. For now, the file will be created by the kernel itself, although it could be
-     *  loaded manually, and called by the kernel.
-     */
-    fs_node_t init;
-    init.file_content_ptr = (uintptr_t)&init_code;
-    init.file_size = sizeof(init_code);
-    init.device = -1;
-    strcpy(init.path, "/init.sys");
 }

@@ -1,4 +1,24 @@
 /*
+ *  ChlorineOS - A work-in-progress operating system working to be
+ *               UNIX-like...
+ *
+ *  Copyright (C) 2022 Nexuss (https://github.com/Dashbloxx)
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+/*
  *  The files `dt.c` & `dt.h` are important if we're going to be using ChlorineOS with the x86 (i386 and up) architecture, because
  *  they allow us to create tables which we can forward to the CPU, allowing us to tell the CPU what properties certain memory has.
  */
