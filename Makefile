@@ -15,7 +15,8 @@ ifeq ($(ARCHITECTURE), i386)
 	gcc -m32 -c ./source/arch/i386/dt.c -o ./object/8cf8fe6b.o -ffreestanding -O2 -Wall -Wextra -DARCHITECTURE=1
 	gcc -m32 -c ./source/arch/i386/isr.c -o ./object/af1ad251.o -ffreestanding -O2 -Wall -Wextra -DARCHITECTURE=1
 	gcc -m32 -c ./source/drivers/serial.c -o ./object/4cd2bf5f.o -ffreestanding -O2 -Wall -Wextra -DARCHITECTURE=1
-	ld -m elf_i386 -T ./script/linker-i386.ld ./object/f0cba9bf.o ./object/131ce24b.o ./object/680cf526.o ./object/51983837.o ./object/b9dcbaa4.o ./object/b15a50b3.o ./object/af1ad251.o ./object/8cf8fe6b.o ./object/b162f378.o ./object/4cd2bf5f.o ./object/9709017e.o ./object/3b17dcfb.o ./object/f170bae7.o -o ./output/chl.bin -nostdlib
+	gcc -m32 -c ./source/drivers/keyboard.c -o ./object/4cd5bf5f.o -ffreestanding -O2 -Wall -Wextra -DARCHITECTURE=1
+	ld -m elf_i386 -T ./script/linker-i386.ld ./object/4cd5bf5f.o ./object/f0cba9bf.o ./object/131ce24b.o ./object/680cf526.o ./object/51983837.o ./object/b9dcbaa4.o ./object/b15a50b3.o ./object/af1ad251.o ./object/8cf8fe6b.o ./object/b162f378.o ./object/4cd2bf5f.o ./object/9709017e.o ./object/3b17dcfb.o ./object/f170bae7.o -o ./output/chl.bin -nostdlib
 endif
 image:
 ifeq ($(ARCHITECTURE), i386)

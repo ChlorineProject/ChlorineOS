@@ -38,7 +38,7 @@ qemu
 mtools
 ```
 
-I believe that these can be installed with debian's/ubuntu's package manager, aswell as Arch linux's package manager. I may soon make a new page exactly describing how to install these packages, but for now I'm busy implementing more functions.
+I believe that these can be installed with debian's/ubuntu's package manager, aswell as Arch linux's package manager. I may soon make a new page exactly describing how to install these packages, but for now I'm busy implementing more functions. 
 
 ## Troubleshooting
 
