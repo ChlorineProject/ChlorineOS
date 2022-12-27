@@ -40,7 +40,7 @@ void *memcpy(void *dst, const void *src, uint32_t n)
 
 void memset(void* str, char ch, size_t n)
 {
-	int i;
+	unsigned int i;
 	char *s = (char*) str;
 	for(i=0; i<n; i++)
     {

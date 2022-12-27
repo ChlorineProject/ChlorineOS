@@ -31,51 +31,24 @@
  */
 #include "./modules/fs.h"
 /*
- *  Let's now include all of the i386-compatible code, if we will even compile for i386 or i386-related architectures.
+ *  Let's include `8259pic.h` to be able to initialize 8259 PIC...
  */
 #if ARCHITECTURE == 1
-#include "./arch/i386/dt.h"
-#include "./arch/i386/paging.h"
+#include "./arch/i386/8259pic.h"
 #endif
 
 /*
- *  This is the function that is called by `entry.asm`. The file `entry.asm` gets loaded by the GRUB bootloader, and
+ *  This is the function that is called by `bootstrap.S`. The file `bootstrap.S` gets loaded by the GRUB bootloader, and
  *  that's how ChlorineOS gets loaded...
  */
 void main()
 {
     /*
-     *  Let's define some pointers that will map out the heap for ChlorineOS's kernel...
-     */
-    void *heap_start = (uint32_t)0x00E00000;
-    void *heap_end = heap_start + 0x00100000;
-    /*
-     *  Let's initialize the serial driver (`drivers/serial.c` & `drivers/serial.h`)
+     *  Let's initialize the serial driver...
      */
     printf("Initializing the serial module...\n");
     init_serial();
-    /*
-     *  If we're using a i386-compatible operating system, then we shall initialize descriptor tables...
-     */
-    #if ARCHITECTURE == 1
-    printf("Initializing paging...\n");
-    init_paging();
-    printf("Initializing descriptor tables...\n");
-    init_descriptor_tables();
-    #endif
-    printf("Initializing the heap...\n");
-    /*
-     *  Let's initialize the heap!
-     */
-    init_heap(heap_start, heap_end);
-    /*
-     *  Now that the heap is initialized, we can allocate memory, free it, etc. This allows us to create a memory-efficient
-     *  kernel:
-     *      | void *ptr = kmalloc(1024);
-     *      | printf("Let's allocate 1024 bytes...\nThis is the pointer to the allocated memory: %d\n", ptr);
-     *      | void *ptr2 = kmalloc(1024);
-     *      | printf("Let's allocate 1024 more bytes...\nThis is the pointer to the allocated memory: %d\n", ptr2);
-     */
+
     /*
      *  Let's setup the 8259 PIC (Programmable Interrupt Controller)
      */

@@ -2,23 +2,17 @@ menu:
 	@echo "Not enough parameters! Try 'make kernel', 'make image' and then 'make test'..."
 kernel:
 ifeq ($(ARCHITECTURE), i386)
-	nasm -f elf32 ./source/entry.asm -o ./object/f170bae7.o
-	nasm -f elf32 ./source/arch/i386/dt.asm -o ./object/b15a50b3.o
-	nasm -f elf32 ./source/arch/i386/int.asm -o ./object/b9dcbaa4.o
-	nasm -f elf32 ./source/arch/i386/controlregs.asm -o ./object/b9ddgaa4.o
-	gcc -m32 -c ./source/main.c -o ./object/3b17dcfb.o -ffreestanding -O2 -Wall -Wextra -DARCHITECTURE=1
-	gcc -m32 -c ./source/modules/common.c -o ./object/680cf526.o -ffreestanding -O2 -Wall -Wextra -DARCHITECTURE=1
-	gcc -m32 -c ./source/modules/fs.c -o ./object/f0cba9bf.o -ffreestanding -O2 -Wall -Wextra -DARCHITECTURE=1
-	gcc -m32 -c ./source/modules/heap.c -o ./object/51983837.o -ffreestanding -O2 -Wall -Wextra -DARCHITECTURE=1
-	gcc -m32 -c ./source/arch/i386/ioports.c -o ./object/9709017e.o -ffreestanding -O2 -Wall -Wextra -DARCHITECTURE=1
-	gcc -m32 -c ./source/arch/i386/8259pic.c -o ./object/131ce24b.o -ffreestanding -O2 -Wall -Wextra -DARCHITECTURE=1
-	gcc -m32 -c ./source/arch/i386/monitor.c -o ./object/b162f378.o -ffreestanding -O2 -Wall -Wextra -DARCHITECTURE=1
-	gcc -m32 -c ./source/arch/i386/dt.c -o ./object/8cf8fe6b.o -ffreestanding -O2 -Wall -Wextra -DARCHITECTURE=1
-	gcc -m32 -c ./source/arch/i386/isr.c -o ./object/af1ad251.o -ffreestanding -O2 -Wall -Wextra -DARCHITECTURE=1
-	gcc -m32 -c ./source/arch/i386/paging.c -o ./object/af2ad251.o -ffreestanding -O2 -Wall -Wextra -DARCHITECTURE=1
-	gcc -m32 -c ./source/drivers/serial.c -o ./object/4cd2bf5f.o -ffreestanding -O2 -Wall -Wextra -DARCHITECTURE=1
-	gcc -m32 -c ./source/drivers/keyboard.c -o ./object/4cd5bf5f.o -ffreestanding -O2 -Wall -Wextra -DARCHITECTURE=1
-	ld -m elf_i386 -T ./script/linker-i386.ld ./object/b9ddgaa4.o ./object/af2ad251.o ./object/4cd5bf5f.o ./object/f0cba9bf.o ./object/131ce24b.o ./object/680cf526.o ./object/51983837.o ./object/b9dcbaa4.o ./object/b15a50b3.o ./object/af1ad251.o ./object/8cf8fe6b.o ./object/b162f378.o ./object/4cd2bf5f.o ./object/9709017e.o ./object/3b17dcfb.o ./object/f170bae7.o -o ./output/chl.bin -nostdlib
+	i386-elf-as ./source/arch/i386/bootstrap.S -o ./object/3b17dcfg.o
+	i386-elf-gcc -c ./source/main.c -o ./object/3b17dcfb.o -ffreestanding -O2 -Wall -Wextra -DARCHITECTURE=1
+	i386-elf-gcc -c ./source/modules/common.c -o ./object/680cf526.o -ffreestanding -O2 -Wall -Wextra -DARCHITECTURE=1
+	i386-elf-gcc -c ./source/modules/fs.c -o ./object/f0cba9bf.o -ffreestanding -O2 -Wall -Wextra -DARCHITECTURE=1
+	i386-elf-gcc -c ./source/modules/heap.c -o ./object/51983837.o -ffreestanding -O2 -Wall -Wextra -DARCHITECTURE=1
+	i386-elf-gcc -c ./source/arch/i386/ioports.c -o ./object/9709017e.o -ffreestanding -O2 -Wall -Wextra -DARCHITECTURE=1
+	i386-elf-gcc -c ./source/arch/i386/8259pic.c -o ./object/131ce24b.o -ffreestanding -O2 -Wall -Wextra -DARCHITECTURE=1
+	i386-elf-gcc -c ./source/arch/i386/monitor.c -o ./object/b162f378.o -ffreestanding -O2 -Wall -Wextra -DARCHITECTURE=1
+	i386-elf-gcc -c ./source/drivers/serial.c -o ./object/4cd2bf5f.o -ffreestanding -O2 -Wall -Wextra -DARCHITECTURE=1
+	i386-elf-gcc -c ./source/drivers/keyboard.c -o ./object/4cd5bf5f.o -ffreestanding -O2 -Wall -Wextra -DARCHITECTURE=1
+	i386-elf-gcc -T ./script/linker-i386.ld -o ./output/chl.bin -ffreestanding -O2 -nostdlib ./object/3b17dcfg.o ./object/4cd5bf5f.o ./object/3b17dcfb.o ./object/4cd2bf5f.o ./object/680cf526.o ./object/f0cba9bf.o ./object/51983837.o ./object/9709017e.o ./object/131ce24b.o ./object/b162f378.o -lgcc
 endif
 image:
 ifeq ($(ARCHITECTURE), i386)

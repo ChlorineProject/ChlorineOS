@@ -20,8 +20,8 @@
 
 #include <stddef.h>
 #include <stdbool.h>
-#include <string.h>
 
+#include "./common.h"
 #include "./heap.h"
 
 void *g_kheap_start_addr = NULL, *g_kheap_end_addr = NULL;

@@ -128,13 +128,3 @@ void monitor_write(char *c)
         monitor_put(c[i++]);
     }
 }
-
-void monitor_write_hex(unsigned int n)
-{
-   
-}
-
-void monitor_write_dec(unsigned int n)
-{
-
-}

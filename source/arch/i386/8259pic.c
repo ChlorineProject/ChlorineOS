@@ -21,13 +21,14 @@
 #include <stdint.h>
 #include <stddef.h>
 
+#include "./ioports.h"
 #include "./8259pic.h"
 
 void init_8259pic()
 {
     uint8_t a1, a2;
-    a1 = outb(PIC1_DATA);
-    a2 = outb(PIC2_DATA);
+    a1 = inb(PIC1_DATA);
+    a2 = inb(PIC2_DATA);
     outb(PIC1_COMMAND, ICW1);
     outb(PIC2_COMMAND, ICW1);
     outb(PIC1_DATA, 0x20);
